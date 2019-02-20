@@ -1,9 +1,6 @@
 package es.daniel.github;
 
-import org.kohsuke.github.GHCommit;
-import org.kohsuke.github.GHRelease;
-import org.kohsuke.github.GHRepository;
-import org.kohsuke.github.GitHub;
+import org.kohsuke.github.*;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -26,16 +23,17 @@ public class GitHubService {
     }
 
     public void printReleasesLeadTime() throws IOException {
-        List<GHRelease> releases = repository.listReleases().asList();
-        Collections.reverse(releases);
-        GHCommit firstCommit = repository.queryCommits().list().asList().get(repository.queryCommits().list().asList().size() - 1);
+        List<GHTag> tags = repository.listTags().asList();
+        Collections.reverse(tags);
+        GHCommit firstCommit = getOldestCommit();
         Date startDate = firstCommit.getCommitDate();
-        for (GHRelease release : releases) {
-            if (!release.getName().toUpperCase().contains("RC")){
-                long days = TimeUnit.MILLISECONDS.toDays(Math.abs(startDate.getTime() - release.getCreatedAt().getTime()));
-                System.out.println("Release: " + release.getName() + " with Release Lead Time: " + days + " days");
+        for (GHTag tag : tags) {
+            if (!tag.getName().toUpperCase().contains("RC")){
+                long days = TimeUnit.MILLISECONDS
+                        .toDays(Math.abs(startDate.getTime() - tag.getCommit().getCommitDate().getTime()));
+                System.out.println("Release: " + tag.getName() + " with Release Lead Time: " + days + " days");
 
-                startDate = release.getCreatedAt();
+                startDate = tag.getCommit().getCommitDate();
             }
         }
     }

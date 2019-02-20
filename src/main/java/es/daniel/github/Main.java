@@ -8,6 +8,7 @@ public class Main {
         try {
             String oauthAccessToken = System.getenv("OAUTH_TOKEN");
 
+            // "apache/spark"
             GitHubService gitHubService = new GitHubService(oauthAccessToken, "apache/spark");
             gitHubService.printReleasesLeadTime();
 
