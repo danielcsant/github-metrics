@@ -38,7 +38,7 @@ public class GitHubService {
         }
     }
 
-    public GHCommit getOldestCommit() {
+    public GHCommit getOldestCommit() throws IOException {
         GHCommit oldestCommit = null;
 
         try {
@@ -49,6 +49,7 @@ public class GitHubService {
                     .list().withPageSize(1).iterator().next();
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
 
         return oldestCommit;

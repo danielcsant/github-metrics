@@ -9,7 +9,7 @@ public class Main {
             String oauthAccessToken = System.getenv("OAUTH_TOKEN");
 
             // "apache/spark"
-            GitHubService gitHubService = new GitHubService(oauthAccessToken, "apache/spark");
+            GitHubService gitHubService = new GitHubService(oauthAccessToken, "apache/kafka");
             gitHubService.printReleasesLeadTime();
 
         } catch (IOException e) {
