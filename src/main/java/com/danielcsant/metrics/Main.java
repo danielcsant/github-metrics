@@ -1,4 +1,4 @@
-package es.daniel.github;
+package com.danielcsant.metrics;
 
 import java.io.IOException;
 
@@ -6,10 +6,10 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            String oauthAccessToken = System.getenv("OAUTH_TOKEN");
 
             // "apache/spark"
-            GitHubService gitHubService = new GitHubService(oauthAccessToken, "apache/kafka");
+            GitHubService gitHubService =
+                    new GitHubService(AppProperties.getProperty("oauthAccessToken"), "apache/kafka");
             gitHubService.printReleasesLeadTime();
 
         } catch (IOException e) {

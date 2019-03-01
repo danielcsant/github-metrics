@@ -1,4 +1,4 @@
-package es.daniel.github;
+package com.danielcsant.metrics;
 
 import org.kohsuke.github.*;
 

@@ -1,21 +1,19 @@
-package es.daniel.github;
+package com.danielcsant.metrics;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.kohsuke.github.GHCommit;
 
 import java.io.IOException;
-import java.util.Date;
-
-import static org.junit.Assert.*;
 
 public class GitHubServiceIntegrationTest {
 
     @Test
+    @Ignore
     public void getOldestCommit() throws IOException {
-        String oauthAccessToken = System.getenv("OAUTH_TOKEN");
 
-        GitHubService gitHubService = new GitHubService(oauthAccessToken, "apache/spark");
+        GitHubService gitHubService = new GitHubService(AppProperties.getProperty("oauthAccessToken"), "apache/spark");
 
         GHCommit ghCommit = gitHubService.getOldestCommit();
 
